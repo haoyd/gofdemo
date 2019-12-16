@@ -62,17 +62,32 @@ public class Main {
             }
 
             index = Integer.parseInt(str);
-
             System.out.println("您选择的是：" + PATTERNS.get(index) + "\n\n");
+            executePatternWork(index);
         }
         scan.close();
     }
 
+    /**
+     * 打印序号和名称
+     */
     private static void printPatterns() {
         PATTERNS.forEach((key, value) -> {
             System.out.println(key + "\t" + value);
         });
 
-        System.out.println("\n\n请输入设计模式序号：\n\n");
+        System.out.println("\n\n请输入设计模式序号（退出输入 exit）：\n\n");
+    }
+
+    /**
+     * 执行指定设计模式程序
+     * @param index
+     */
+    private static void executePatternWork(int index) {
+        switch (index) {
+            case 0:
+
+                break;
+        }
     }
 }
