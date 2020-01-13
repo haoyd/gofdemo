@@ -1,13 +1,17 @@
 package com.haoyd.gofdemo;
 
 /**
- * 统计每个页面用户点击按钮的次数。
+ * 统计每个页面用户点击按钮的次数总和。
  */
 public class Singleton {
     public void main() {
         HomePage homePage = new HomePage();
         homePage.doWorks();
         homePage.finishPage();
+
+        OrderPage orderPage = new OrderPage();
+        orderPage.doWorks();
+        orderPage.finishPage();
     }
 }
 
@@ -16,13 +20,13 @@ public class Singleton {
  */
 class ClickCounter {
 
-    private int clickNum = 0;
+    private static int clickNum = 0;
 
-    public void countClick() {
+    public static void countClick() {
         clickNum++;
     }
 
-    public int getClickNum() {
+    public static int getClickNum() {
         return clickNum;
     }
 }
@@ -32,12 +36,8 @@ class ClickCounter {
  */
 class HomePage {
 
-    private ClickCounter clickCounter;
-
     public HomePage() {
-        System.out.println();
-        Logger.outMain("进入主页面");
-        clickCounter = new ClickCounter();
+        Logger.pageIn("主页");
     }
 
     /**
@@ -52,8 +52,8 @@ class HomePage {
      * 退出页面
      */
     public void finishPage() {
-        Logger.outMain("退出主页面");
-        Logger.outMain("整个页面点击了 " + clickCounter.getClickNum() + " 次");
+        Logger.pageOut("主页");
+        Logger.outMain("总共点击了 " + ClickCounter.getClickNum() + " 次");
     }
 
     /**
@@ -61,7 +61,7 @@ class HomePage {
      */
     private void openBanner() {
         Logger.out("打开 banner");
-        clickCounter.countClick();
+        ClickCounter.countClick();
     }
 
     /**
@@ -69,6 +69,41 @@ class HomePage {
      */
     private void openClassList() {
         Logger.out("打开分类列表");
-        clickCounter.countClick();
+        ClickCounter.countClick();
+    }
+}
+
+/**
+ * 订单页面
+ */
+class OrderPage {
+    public OrderPage() {
+        Logger.pageIn("订单");
+    }
+
+    /**
+     * 退出页面
+     */
+    public void finishPage() {
+        Logger.pageOut("订单");
+        Logger.outMain("总共点击了 " + ClickCounter.getClickNum() + " 次");
+    }
+
+    /**
+     * 该页面的所有操作
+     */
+    public void doWorks() {
+        finishOrder();
+        evaluateOrder();
+    }
+
+    private void finishOrder() {
+        Logger.out("点击完成订单");
+        ClickCounter.countClick();
+    }
+
+    private void evaluateOrder() {
+        Logger.out("评价订单");
+        ClickCounter.countClick();
     }
 }

@@ -9,5 +9,16 @@ public class Logger {
         System.out.println("  " + s);
     }
 
+    public static void line() {
+        System.out.println("--------------------------------------");
+    }
 
+    public static void pageIn(String pageName) {
+        out(" ");
+        outMain("-----------------" + pageName + " start -----------------");
+    }
+
+    public static void pageOut(String pageName) {
+        outMain("-----------------" + pageName + " end -----------------");
+    }
 }
