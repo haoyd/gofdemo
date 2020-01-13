@@ -1,6 +1,5 @@
 package com.haoyd.gofdemo;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -86,7 +85,7 @@ public class Main {
     private static void executePatternWork(int index) {
         switch (index) {
             case 0:
-
+                new Singleton().main();
                 break;
         }
     }

@@ -50,3 +50,4 @@ dependency-reduced-pom.xml
 *.ipr
 *.iws
 *.idea
+*.kotlin_module
