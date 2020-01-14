@@ -20,13 +20,15 @@ public class Singleton {
  */
 class ClickCounter {
 
+    public static ClickCounter clickCounter = new ClickCounter();
+
     private static int clickNum = 0;
 
-    public static void countClick() {
+    public void countClick() {
         clickNum++;
     }
 
-    public static int getClickNum() {
+    public int getClickNum() {
         return clickNum;
     }
 }
@@ -53,7 +55,7 @@ class HomePage {
      */
     public void finishPage() {
         Logger.pageOut("主页");
-        Logger.outMain("总共点击了 " + ClickCounter.getClickNum() + " 次");
+        Logger.outMain("总共点击了 " + ClickCounter.clickCounter.getClickNum() + " 次");
     }
 
     /**
@@ -61,7 +63,7 @@ class HomePage {
      */
     private void openBanner() {
         Logger.out("打开 banner");
-        ClickCounter.countClick();
+        ClickCounter.clickCounter.countClick();
     }
 
     /**
@@ -69,7 +71,7 @@ class HomePage {
      */
     private void openClassList() {
         Logger.out("打开分类列表");
-        ClickCounter.countClick();
+        ClickCounter.clickCounter.countClick();
     }
 }
 
@@ -86,7 +88,7 @@ class OrderPage {
      */
     public void finishPage() {
         Logger.pageOut("订单");
-        Logger.outMain("总共点击了 " + ClickCounter.getClickNum() + " 次");
+        Logger.outMain("总共点击了 " + ClickCounter.clickCounter.getClickNum() + " 次");
     }
 
     /**
@@ -99,11 +101,11 @@ class OrderPage {
 
     private void finishOrder() {
         Logger.out("点击完成订单");
-        ClickCounter.countClick();
+        ClickCounter.clickCounter.countClick();
     }
 
     private void evaluateOrder() {
         Logger.out("评价订单");
-        ClickCounter.countClick();
+        ClickCounter.clickCounter.countClick();
     }
 }
