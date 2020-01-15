@@ -20,11 +20,14 @@ public class Singleton {
  */
 class ClickCounter {
 
-    private static ClickCounter clickCounter = new ClickCounter();
+    private static ClickCounter clickCounter = null;
 
     private ClickCounter() {}
 
     public static ClickCounter getInstance() {
+        if (clickCounter == null) {
+            clickCounter = new ClickCounter();
+        }
         return clickCounter;
     }
 
