@@ -13,12 +13,12 @@ public class Logger {
         System.out.println("--------------------------------------");
     }
 
-    public static void pageIn(String pageName) {
+    public static void handleStart(String name) {
         out(" ");
-        outMain("-----------------" + pageName + " start -----------------");
+        outMain("-----------------" + name + " start -----------------");
     }
 
-    public static void pageOut(String pageName) {
-        outMain("-----------------" + pageName + " end -----------------");
+    public static void handleEnd(String name) {
+        outMain("-----------------" + name + " end -----------------");
     }
 }

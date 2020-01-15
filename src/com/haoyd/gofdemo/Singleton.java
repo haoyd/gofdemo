@@ -1,43 +1,49 @@
 package com.haoyd.gofdemo;
 
 /**
- * 统计每个页面用户点击按钮的次数总和。
+ * 统计每个页面用户操作按钮的次数总和。
  */
 public class Singleton {
     public void main() {
-        HomePage homePage = new HomePage();
-        homePage.doWorks();
-        homePage.finishPage();
 
-        OrderPage orderPage = new OrderPage();
-        orderPage.doWorks();
-        orderPage.finishPage();
+        DownloadServer downloadServer = new DownloadServer();
+        downloadServer.download("水手");
+        downloadServer.download("你笑起来真好看");
+        downloadServer.download("花海");
+
+//        HomePage homePage = new HomePage();
+//        homePage.doWorks();
+//        homePage.finishPage();
+//
+//        OrderPage orderPage = new OrderPage();
+//        orderPage.doWorks();
+//        orderPage.finishPage();
     }
 }
 
 /**
- * 点击计数器
+ * 操作计数器
  */
-class ClickCounter {
+class OperationCounter {
 
-    private static ClickCounter clickCounter = null;
+    private static OperationCounter operationCounter = null;
 
-    private ClickCounter() {}
+    private OperationCounter() {}
 
-    public static ClickCounter getInstance() {
-        if (clickCounter == null) {
-            clickCounter = new ClickCounter();
+    public static OperationCounter getInstance() {
+        if (operationCounter == null) {
+            operationCounter = new OperationCounter();
         }
-        return clickCounter;
+        return operationCounter;
     }
 
     private static int clickNum = 0;
 
-    public void countClick() {
+    public void countOperation() {
         clickNum++;
     }
 
-    public int getClickNum() {
+    public int getTotalNum() {
         return clickNum;
     }
 }
@@ -48,7 +54,7 @@ class ClickCounter {
 class HomePage {
 
     public HomePage() {
-        Logger.pageIn("主页");
+        Logger.handleStart("主页");
     }
 
     /**
@@ -63,8 +69,8 @@ class HomePage {
      * 退出页面
      */
     public void finishPage() {
-        Logger.pageOut("主页");
-        Logger.outMain("总共点击了 " + ClickCounter.getInstance().getClickNum() + " 次");
+        Logger.handleEnd("主页");
+        Logger.outMain("总共操作了 " + OperationCounter.getInstance().getTotalNum() + " 次");
     }
 
     /**
@@ -72,7 +78,7 @@ class HomePage {
      */
     private void openBanner() {
         Logger.out("打开 banner");
-        ClickCounter.getInstance().countClick();
+        OperationCounter.getInstance().countOperation();
     }
 
     /**
@@ -80,7 +86,7 @@ class HomePage {
      */
     private void openClassList() {
         Logger.out("打开分类列表");
-        ClickCounter.getInstance().countClick();
+        OperationCounter.getInstance().countOperation();
     }
 }
 
@@ -89,15 +95,15 @@ class HomePage {
  */
 class OrderPage {
     public OrderPage() {
-        Logger.pageIn("订单");
+        Logger.handleStart("订单");
     }
 
     /**
      * 退出页面
      */
     public void finishPage() {
-        Logger.pageOut("订单");
-        Logger.outMain("总共点击了 " + ClickCounter.getInstance().getClickNum() + " 次");
+        Logger.handleEnd("订单");
+        Logger.outMain("总共操作了 " + OperationCounter.getInstance().getTotalNum() + " 次");
     }
 
     /**
@@ -109,12 +115,27 @@ class OrderPage {
     }
 
     private void finishOrder() {
-        Logger.out("点击完成订单");
-        ClickCounter.getInstance().countClick();
+        Logger.out("操作完成订单");
+        OperationCounter.getInstance().countOperation();
     }
 
     private void evaluateOrder() {
         Logger.out("评价订单");
-        ClickCounter.getInstance().countClick();
+        OperationCounter.getInstance().countOperation();
+    }
+}
+
+class DownloadServer {
+    public void download(String file) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Logger.handleStart("下载");
+                Logger.out("下载：" + file);
+                OperationCounter.getInstance().countOperation();
+                Logger.handleEnd("下载");
+                Logger.outMain("总共操作了 " + OperationCounter.getInstance().getTotalNum() + " 次");
+            }
+        }).start();
     }
 }
