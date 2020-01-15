@@ -22,6 +22,8 @@ class ClickCounter {
 
     private static ClickCounter clickCounter = new ClickCounter();
 
+    private ClickCounter() {}
+
     public static ClickCounter getInstance() {
         return clickCounter;
     }
