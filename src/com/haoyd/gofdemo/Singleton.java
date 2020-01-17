@@ -48,6 +48,24 @@ class OperationCounter {
 }
 
 /**
+ * 枚举实现单例
+ */
+enum OperationCounter2 {
+
+    INSTANCE;
+
+    private int clickNum = 0;
+
+    public void countOperation() {
+        clickNum++;
+    }
+
+    public int getTotalNum() {
+        return clickNum;
+    }
+}
+
+/**
  * 主页面
  */
 class HomePage {
