@@ -30,16 +30,13 @@ class OperationCounter {
 
     private int clickNum = 0;
 
+    static {
+        operationCounter = new OperationCounter();
+    }
+
     private OperationCounter() {}
 
-    public synchronized static OperationCounter getInstance() {
-        if (operationCounter == null) {
-            synchronized (OperationCounter.class) {
-                if (operationCounter == null) {
-                    operationCounter = new OperationCounter();
-                }
-            }
-        }
+    public static OperationCounter getInstance() {
         return operationCounter;
     }
 
