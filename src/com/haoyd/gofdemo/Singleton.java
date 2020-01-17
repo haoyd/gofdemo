@@ -28,16 +28,18 @@ class OperationCounter {
 
     private static OperationCounter operationCounter = null;
 
+    private int clickNum = 0;
+
     private OperationCounter() {}
 
     public synchronized static OperationCounter getInstance() {
         if (operationCounter == null) {
-            operationCounter = new OperationCounter();
+            synchronized (OperationCounter.class) {
+                operationCounter = new OperationCounter();
+            }
         }
         return operationCounter;
     }
-
-    private static int clickNum = 0;
 
     public void countOperation() {
         clickNum++;
@@ -137,5 +139,18 @@ class DownloadServer {
                 Logger.outMain("总共操作了 " + OperationCounter.getInstance().getTotalNum() + " 次");
             }
         }).start();
+    }
+}
+
+/**
+ * 耗时操作
+ */
+class LongTimeOperation {
+    public static void work() {
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
