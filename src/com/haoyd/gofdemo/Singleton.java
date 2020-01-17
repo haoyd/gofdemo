@@ -30,7 +30,7 @@ class OperationCounter {
 
     private OperationCounter() {}
 
-    public static OperationCounter getInstance() {
+    public synchronized static OperationCounter getInstance() {
         if (operationCounter == null) {
             operationCounter = new OperationCounter();
         }
