@@ -26,18 +26,12 @@ public class Singleton {
  */
 class OperationCounter {
 
-    private static OperationCounter operationCounter = null;
-
     private int clickNum = 0;
-
-    static {
-        operationCounter = new OperationCounter();
-    }
 
     private OperationCounter() {}
 
     public static OperationCounter getInstance() {
-        return operationCounter;
+        return OperationCounterInstance.INSTANCE;
     }
 
     public void countOperation() {
@@ -46,6 +40,10 @@ class OperationCounter {
 
     public int getTotalNum() {
         return clickNum;
+    }
+
+    private static class OperationCounterInstance {
+        private static final OperationCounter INSTANCE = new OperationCounter();
     }
 }
 
