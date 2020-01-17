@@ -35,7 +35,9 @@ class OperationCounter {
     public synchronized static OperationCounter getInstance() {
         if (operationCounter == null) {
             synchronized (OperationCounter.class) {
-                operationCounter = new OperationCounter();
+                if (operationCounter == null) {
+                    operationCounter = new OperationCounter();
+                }
             }
         }
         return operationCounter;
